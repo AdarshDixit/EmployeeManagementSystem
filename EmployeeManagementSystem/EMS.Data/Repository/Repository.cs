@@ -9,47 +9,48 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.EMS.Data.Repository
 {
-    public abstract class SQLRepository<TEntity, TContext> : IRepository<TEntity>
-         where TEntity : class, IEntity
-         where TContext : DbContext
+    public abstract class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly TContext context;
-        public SQLRepository(TContext context)
+        private readonly EmployeeDataContext context;
+
+        public Repository(EmployeeDataContext context)
         {
             this.context = context;
         }
-        public async Task<TEntity> Add(TEntity entity)
+       
+
+        public async Task<T> Add(T entity)
         {
-            context.Set<TEntity>().Add(entity);
+            context.Set<T>().Add(entity);
             await context.SaveChangesAsync();
             return entity;
         }
 
-        public async Task<TEntity> Delete(int id)
+        public async Task<T> Delete(Guid id)
         {
-            var entity = await context.Set<TEntity>().FindAsync(id);
+            var entity = await context.Set<T>().FindAsync(id);
             if (entity == null)
             {
                 return entity;
             }
 
-            context.Set<TEntity>().Remove(entity);
+            context.Set<T>().Remove(entity);
             await context.SaveChangesAsync();
 
             return entity;
         }
 
-        public async Task<TEntity> Get(int id)
+        public async Task<T> Get(Guid id)
         {
-            return await context.Set<TEntity>().FindAsync(id);
+            return await context.Set<T>().FindAsync(id);
         }
 
-        public async Task<List<TEntity>> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return await context.Set<TEntity>().ToListAsync();
+            return await context.Set<T>().ToListAsync();
         }
 
-        public async Task<TEntity> Update(TEntity entity)
+        public async Task<T> Update(T entity)
         {
             context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();

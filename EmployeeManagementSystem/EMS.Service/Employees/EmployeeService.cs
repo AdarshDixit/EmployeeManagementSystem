@@ -9,11 +9,9 @@ namespace EmployeeManagementSystem.EMS.Service.Employees
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IEmployeeRepository repo;
 
-        public EmployeeService(IEmployeeRepository repo)
+        public EmployeeService()
         {
-            this.repo = repo;
         }
         public IEnumerable<Employee> GetAllEmployeesAsync()
         {

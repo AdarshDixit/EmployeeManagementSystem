@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.EMS.Domain.Entities
 {
-    public interface IEntity
+    public class BaseEntity : IEntity
     {
-        Guid Id { get; set; }
-        DateTime CreatedAt { get; }
+        public Guid Id { get; set; }
+        public DateTime CreatedAt => DateTime.Now;
     }
 }

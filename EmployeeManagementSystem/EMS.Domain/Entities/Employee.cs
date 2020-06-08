@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.EMS.Domain.Entities
 {
-    public class Employee : IEntity
+    public class Employee : BaseEntity
     {
-        public int Id { get; set; }
         [Required]
         [MaxLength(50)]
         public string FirstName { get; protected set; }

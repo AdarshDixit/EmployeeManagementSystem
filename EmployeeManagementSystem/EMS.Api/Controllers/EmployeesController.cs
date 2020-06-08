@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeManagementSystem.EMS.Data.Repository;
 using EmployeeManagementSystem.EMS.Domain.DataTransferObjects;
+using EmployeeManagementSystem.EMS.Domain.Entities;
 using EmployeeManagementSystem.EMS.Service.Employees;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,17 +15,17 @@ namespace EmployeeManagementSystem.EMS.Api.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IEmployeeService employeeService;
+        private readonly IRepository<Employee> employeeRepo;
 
-        public EmployeesController(IEmployeeService employeeService)
+        public EmployeesController(IRepository<Employee> employeeRepo)
         {
-            this.employeeService = employeeService;
+            this.employeeRepo = employeeRepo;
         }
         // GET: api/Employees
         [HttpGet]
         public IEnumerable<EmployeeDto> Get()
         {
-            employeeService.GetAllEmployeesAsync();
+            employeeRepo.GetAll();
             return new List<EmployeeDto>();
         }
 
