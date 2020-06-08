@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.EMS.Data.Repository
 {
-    public abstract class Repository<T> : IRepository<T> where T : BaseEntity
+    public class Repository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly EmployeeDataContext context;
 
@@ -26,7 +26,7 @@ namespace EmployeeManagementSystem.EMS.Data.Repository
             return entity;
         }
 
-        public async Task<T> Delete(Guid id)
+        public async Task<T> Delete(int id)
         {
             var entity = await context.Set<T>().FindAsync(id);
             if (entity == null)
@@ -40,7 +40,7 @@ namespace EmployeeManagementSystem.EMS.Data.Repository
             return entity;
         }
 
-        public async Task<T> Get(Guid id)
+        public async Task<T> Get(int id)
         {
             return await context.Set<T>().FindAsync(id);
         }

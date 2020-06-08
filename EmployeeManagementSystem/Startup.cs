@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EmployeeManagementSystem.EMS.Data;
 using EmployeeManagementSystem.EMS.Data.Repository;
+using EmployeeManagementSystem.EMS.Domain.Entities;
+using EmployeeManagementSystem.EMS.Service.Employees;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +30,15 @@ namespace EmployeeManagementSystem
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            
             services.AddDbContext<EmployeeDataContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("BankingDBConnection"));
+                opt.UseSqlServer(Configuration.GetConnectionString("EmployeeDBConnection"));
             });
+
+            // services.AddScoped<EmployeeDataContext>();
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
         }

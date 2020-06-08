@@ -15,24 +15,25 @@ namespace EmployeeManagementSystem.EMS.Api.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IRepository<Employee> employeeRepo;
+        private readonly IService<Employee> service;
 
-        public EmployeesController(IRepository<Employee> employeeRepo)
+        public EmployeesController(IService<Employee> service)
         {
-            this.employeeRepo = employeeRepo;
+            this.service = service;
         }
         // GET: api/Employees
-        [HttpGet]
-        public IEnumerable<EmployeeDto> Get()
+        [HttpGet(Name ="GetAll")]
+        public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get()
         {
-            employeeRepo.GetAll();
-            return new List<EmployeeDto>();
+            var abc = await service.GetAllEmployeesAsync();
+            return Ok(new List<EmployeeDto>());
         }
 
         // GET: api/Employees/5
         [HttpGet("{id}", Name = "Get")]
         public EmployeeDto Get(int id)
         {
+            var abc = service.GetEmployeeByIdAsync(id);
             return new EmployeeDto();
         }
 

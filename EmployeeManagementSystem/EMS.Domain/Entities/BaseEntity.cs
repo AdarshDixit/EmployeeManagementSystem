@@ -7,7 +7,7 @@ namespace EmployeeManagementSystem.EMS.Domain.Entities
 {
     public class BaseEntity : IEntity
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public DateTime CreatedAt => DateTime.Now;
     }
 }

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementSystem.EMS.Service.Employees
 {
-    public interface IEmployeeService
+    public interface IService<T> where T : BaseEntity
     {
-        IEnumerable<Employee> GetAllEmployeesAsync();
-        Employee GetEmployeeByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllEmployeesAsync();
+        Task<T> GetEmployeeByIdAsync(int id);
     }
 }
