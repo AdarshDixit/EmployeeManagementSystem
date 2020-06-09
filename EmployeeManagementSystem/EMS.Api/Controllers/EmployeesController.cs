@@ -6,7 +6,8 @@ using EmployeeManagementSystem.EMS.Data.Repository;
 using EmployeeManagementSystem.EMS.Domain.DataTransferObjects;
 using EmployeeManagementSystem.EMS.Domain.Entities;
 using EmployeeManagementSystem.EMS.Domain.QueryStringParameters;
-using EmployeeManagementSystem.EMS.Service.Employees;
+using EmployeeManagementSystem.EMS.Service.Generic;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,18 +25,19 @@ namespace EmployeeManagementSystem.EMS.Api.Controllers
         }
         // GET: api/Employees
         [HttpGet(Name ="GetAll")]
-        public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get([FromQuery] EmployeeQueryParameter parameter)
+        public async Task<ActionResult<IEnumerable<GetEmployeeDto>>> Get([FromQuery] EmployeeQueryParameter parameter)
         {
-            var abc = await service.GetAllEmployeesAsync(parameter);
-            return Ok(new List<EmployeeDto>());
+            var abc = await service.GetAllAsync(parameter);
+            var xyz = TypeAdapter.Adapt<List<GetEmployeeDto>>(abc);
+            return Ok(xyz);
         }
 
         // GET: api/Employees/5
         [HttpGet("{id}", Name = "Get")]
-        public EmployeeDto Get(int id)
+        public GetEmployeeDto Get(int id)
         {
-            var abc = service.GetEmployeeByIdAsync(id);
-            return new EmployeeDto();
+            var abc = service.GetAllById(id);
+            return TypeAdapter.Adapt<GetEmployeeDto>(abc);
         }
 
         // POST: api/Employees

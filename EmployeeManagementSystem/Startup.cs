@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using EmployeeManagementSystem.EMS.Data;
 using EmployeeManagementSystem.EMS.Data.Repository;
 using EmployeeManagementSystem.EMS.Domain.Entities;
-using EmployeeManagementSystem.EMS.Service.Employees;
+using EmployeeManagementSystem.EMS.Service;
+using EmployeeManagementSystem.EMS.Service.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -38,8 +39,8 @@ namespace EmployeeManagementSystem
             });
 
             // services.AddScoped<EmployeeDataContext>();
-            services.AddScoped(typeof(IService<>), typeof(Service<>));
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IService<>), typeof(BaseService<>));
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddControllers();
         }
 

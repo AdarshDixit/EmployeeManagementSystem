@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmployeeManagementSystem.EMS.Service.Employees
+namespace EmployeeManagementSystem.EMS.Service.Generic
 {
     public interface IService<T> where T : BaseEntity
     {
-        Task<IEnumerable<T>> GetAllEmployeesAsync(IQueryParam param);
-        Task<T> GetEmployeeByIdAsync(int id);
+        Task<IEnumerable<T>> GetAllAsync(IQueryParam param);
+        Task<T> GetAllById(int id);
     }
 }
