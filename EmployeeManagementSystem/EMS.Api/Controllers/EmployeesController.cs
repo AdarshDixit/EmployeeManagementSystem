@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EmployeeManagementSystem.EMS.Data.Repository;
 using EmployeeManagementSystem.EMS.Domain.DataTransferObjects;
 using EmployeeManagementSystem.EMS.Domain.Entities;
+using EmployeeManagementSystem.EMS.Domain.QueryStringParameters;
 using EmployeeManagementSystem.EMS.Service.Employees;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,9 +24,9 @@ namespace EmployeeManagementSystem.EMS.Api.Controllers
         }
         // GET: api/Employees
         [HttpGet(Name ="GetAll")]
-        public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get()
+        public async Task<ActionResult<IEnumerable<EmployeeDto>>> Get([FromQuery] EmployeeQueryParameter parameter)
         {
-            var abc = await service.GetAllEmployeesAsync();
+            var abc = await service.GetAllEmployeesAsync(parameter);
             return Ok(new List<EmployeeDto>());
         }
 

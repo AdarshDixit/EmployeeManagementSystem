@@ -11,11 +11,11 @@ namespace EmployeeManagementSystem.EMS.Domain.Entities
     {
         [Required]
         [MaxLength(50)]
-        public string FirstName { get; protected set; }
+        public string FirstName { get; set; }
         
         [Required]
         [MaxLength(50)]
-        public string LastName { get; protected set; }
+        public string LastName { get; set; }
 
         public Department Department { get; set; }
         

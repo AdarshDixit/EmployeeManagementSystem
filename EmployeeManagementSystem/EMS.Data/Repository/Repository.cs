@@ -1,4 +1,6 @@
 ﻿using EmployeeManagementSystem.EMS.Domain.Entities;
+using EmployeeManagementSystem.EMS.Domain.Pagination;
+using EmployeeManagementSystem.EMS.Domain.QueryStringParameters;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -45,9 +47,12 @@ namespace EmployeeManagementSystem.EMS.Data.Repository
             return await context.Set<T>().FindAsync(id);
         }
 
-        public async Task<List<T>> GetAll()
+        public async Task<List<T>> GetAll(IQueryParam param)
         {
-            return await context.Set<T>().ToListAsync();
+            // return await context.Set<T>().OrderBy(on => on.Id).ToListAsync();
+
+            return await PaginatedList<T>.CreateAsync(context.Set<T>(), param.PageNumber, param.PageSize);
+
         }
 
         public async Task<T> Update(T entity)
@@ -55,7 +60,6 @@ namespace EmployeeManagementSystem.EMS.Data.Repository
             context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
             return entity;
-        }
-
+        }       
     }
 }

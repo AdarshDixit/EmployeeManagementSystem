@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using EmployeeManagementSystem.EMS.Domain.Entities;
+using EmployeeManagementSystem.EMS.Domain.QueryStringParameters;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +10,7 @@ namespace EmployeeManagementSystem.EMS.Data.Repository
 {
     public interface IRepository<T> where T : BaseEntity
     {
-        Task<List<T>> GetAll();
+        Task<List<T>> GetAll(IQueryParam param);
         Task<T> Get(int id);
         Task<T> Add(T entity);
         Task<T> Update(T entity);

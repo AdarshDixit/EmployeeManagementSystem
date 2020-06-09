@@ -1,5 +1,7 @@
 ﻿using EmployeeManagementSystem.EMS.Data.Repository;
 using EmployeeManagementSystem.EMS.Domain.Entities;
+using EmployeeManagementSystem.EMS.Domain.Pagination;
+using EmployeeManagementSystem.EMS.Domain.QueryStringParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +18,10 @@ namespace EmployeeManagementSystem.EMS.Service.Employees
             this.repository = repository;
         }
 
-        public async Task<IEnumerable<T>> GetAllEmployeesAsync()
+        public async Task<IEnumerable<T>> GetAllEmployeesAsync(IQueryParam param)
         {
-            return await repository.GetAll();
+            return await repository.GetAll(param);
+
         }
 
         public async Task<T> GetEmployeeByIdAsync(int id)

@@ -3,14 +3,16 @@ using EmployeeManagementSystem.EMS.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeeManagementSystem.Migrations
 {
     [DbContext(typeof(EmployeeDataContext))]
-    partial class EmployeeDataContextModelSnapshot : ModelSnapshot
+    [Migration("20200609053957_Seeding Employee data")]
+    partial class SeedingEmployeedata
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
